@@ -12,7 +12,9 @@ export default function Home() {
   return (
     <>
       <Page metaTitle={"Hlavní stránka"} metaDesc={"Nezisková organizace Vášen ke čtení"}>
-
+        <div>
+          asdasd
+        </div>
       </Page>
     </>
   );

@@ -14,48 +14,50 @@ const Navigation = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav id="header" className="w-full z-30 text-white font-sans px-3 lg:static absolute">
-      <div
-        className={twMerge(
-          "w-full mt-3 px-4 container mx-auto",
-          "xl:max-w-5xl lg:flex flex-wrap items-center",
-          "justify-between py-2 md:mt-5",
-          "bg-emerald-50 lg:rounded-full",
-          isMenuOpen ? 'rounded-3xl' : 'rounded-full')
-        }
-      >
-        <div className="ml-2 flex items-center justify-between lg:hidden">
-          <Logo/>
-          <MenuButton isMenuOpen={isMenuOpen} handleMenuClick={toggleMenu}/>
-        </div>
-
+    <div className={"pb-24 md:pb-28 lg:pb-4"}>
+      <nav id="header" className="w-full z-10 text-white font-sans px-3 lg:static lg:ml-0 -ml-4 absolute">
         <div
           className={twMerge(
-            "w-full flex-grow lg:flex justify-between lg:items-center",
-            "lg:w-auto mt-2 lg:mt-0 text-lg lg:bg-transparent",
-            "text-black p-3 z-20",
-            isMenuOpen ? '' : 'hidden'
-          )}
-          id="nav-content"
+            "w-full mt-3 px-4 container mx-auto",
+            "xl:max-w-5xl lg:flex flex-wrap items-center",
+            "justify-between py-2 md:mt-5",
+            "bg-emerald-50 lg:rounded-full",
+            isMenuOpen ? 'rounded-3xl' : 'rounded-full')
+          }
         >
+          <div className="ml-2 flex items-center justify-between lg:hidden">
+            <Logo/>
+            <MenuButton isMenuOpen={isMenuOpen} handleMenuClick={toggleMenu}/>
+          </div>
 
-          <Logo className={"hidden lg:block"}/>
-          <NavItemList/>
+          <div
+            className={twMerge(
+              "w-full flex-grow lg:flex justify-between lg:items-center",
+              "lg:w-auto mt-2 lg:mt-0 text-lg lg:bg-transparent",
+              "text-black p-3 z-20",
+              isMenuOpen ? '' : 'hidden'
+            )}
+            id="nav-content"
+          >
 
-          <div className="flex gap-2">
-            <Button style={"outline"}>Přidejte se k nám</Button>
-            <Button>Podpoř Vášeň ke čtení</Button>
+            <Logo className={"hidden lg:block"}/>
+            <NavItemList/>
+
+            <div className="flex gap-2 flex-wrap sm:mt-0 mt-4">
+              <Button  style={"outline"}>Přidejte se k nám</Button>
+              <Button >Podpoř Vášeň ke čtení</Button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   )
 }
 
 function Logo(props: {className?: string}) {
   return (
     <Link href="/" className={twMerge("hover:no-underline", props.className)}>
-      <img alt="Logo" className="block max-h-[60px] ml-2" src="/logo.png"/>
+      <img alt="Logo" className="block max-h-[50px] md:max-h-[60px] ml-2" src="/logo.png"/>
     </Link>
   )
 }

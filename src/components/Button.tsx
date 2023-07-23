@@ -6,12 +6,12 @@ export type ButtonRoundness = "medium" | "full";
 // default: green background, white text, rounded.
 // outline: green border, green text, white background, rounded.
 
-export default function Button(props: PropsWithChildren<{ style?: ButtonStyle, roundness?: ButtonRoundness }>) {
+export default function Button(props: PropsWithChildren<{ style?: ButtonStyle, roundness?: ButtonRoundness, className?: string }>) {
   const style = getStyle(props.style ?? "default");
   const roundStyle = getRoundStyle(props.roundness ?? "full");
 
   return (
-    <button className={twMerge("px-3 py-1 text-base font-semibold", style, roundStyle)}>
+    <button className={twMerge("px-3 py-1 text-base font-semibold", style, roundStyle, props.className)}>
       {props.children}
     </button>
   )
