@@ -2,7 +2,7 @@ import {AiOutlineMenu} from 'react-icons/ai'
 import {IoMdClose} from 'react-icons/io'
 import {useState, useCallback} from 'react'
 import Link from "next/link";
-import {Page, pages} from "~/constants";
+import {getNavbarPages, Page, pages} from "~/constants";
 import {useRouter} from "next/router";
 import {twMerge} from "tailwind-merge";
 import Button from "~/components/Button";
@@ -78,7 +78,7 @@ function NavItemList() {
   return (
     <ul className="list-reset lg:flex items-center justify-between gap-1">
       {
-        Object.values(pages).map((page) => (
+        getNavbarPages().map((page) => (
           <NavItem page={page}/>
         ))
       }
