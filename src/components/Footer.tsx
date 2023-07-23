@@ -2,23 +2,39 @@ import Link from "next/link";
 import {getNavbarPages, pages} from "~/constants";
 import {BsFacebook, BsInstagram, BsLinkedin} from "react-icons/bs";
 import {PropsWithChildren} from "react";
+import {twMerge} from "tailwind-merge";
 
 export default function Footer() {
   return (
-    <footer className={"border px-4 md:px-32 lg:px-40 py-4 space-y-12 font-semibold leading-10"}>
-      <div className={"flex flex-wrap justify-center md:justify-between gap-14"}>
-        <LegalInfo/>
+    <footer className={""}>
+      <Heading/>
+      <div className={"px-4 md:px-32 lg:px-40 py-4 space-y-12 font-semibold leading-10"}>
+        <div className={"flex flex-wrap justify-center md:justify-between gap-14"}>
+          <LegalInfo/>
 
-        <div className={"flex flex-row gap-12 md:mt-10"}>
-          <HomePanel/>
-          <ContactInfoPanel/>
+          <div className={"flex flex-row gap-12 md:mt-10"}>
+            <HomePanel/>
+            <ContactInfoPanel/>
+          </div>
         </div>
-      </div>
 
-      <BottomLinks/>
+        <BottomLinks/>
+      </div>
     </footer>
   )
 }
+
+function Heading() {
+  return (
+    <div className={twMerge(
+      "flex items-center justify-center bg-emerald-50 px-8 sm:px-20 md:px-28 lg:px-48 xl:px-52",
+      "text-center h-72 text-xl sm:text-2xl font-semibold text-brand-800")
+    }>
+      Pomozte nám oživit náladu našich babiček a dědečků a mějme na paměti, že i my jednou budeme ve stejném věku.
+    </div>
+  )
+}
+
 function Panel(props: PropsWithChildren<{title: string}>) {
   return (
     <div className={"text-center"}>
