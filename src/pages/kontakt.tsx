@@ -27,7 +27,7 @@ export default function Contact() {
             <LegalInfo className={'mt-8 hidden sm:block'} />
           </div>
 
-          <ContactUsForm />
+          <ContactUsForm formId={"contact-us"} />
         </div>
       </div>
     </Page>

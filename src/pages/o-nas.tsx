@@ -22,7 +22,7 @@ function WannaJoin() {
       <p className={"text-lg max-w-[700px] mx-auto"}>
         Stále hledáme lidi do týmu, takže pokud se chcete přidat, neváhejte se nám ozvat skrze přiložený formulář.
       </p>
-      <ContactUsForm className={"mx-auto"}/>
+      <ContactUsForm formId={"wanna-join"} className={"mx-auto"}/>
     </div>
   )
 }

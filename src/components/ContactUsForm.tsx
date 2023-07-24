@@ -1,4 +1,4 @@
-import React, {FormEvent, useEffect} from "react";
+import React, {FormEvent} from "react";
 import {api} from "~/utils/api";
 import {toast} from "react-toastify";
 import Input from "~/components/Input";
@@ -12,17 +12,20 @@ type Data = {
   message: string
 }
 
-export default function ContactUsForm(props: {className?: string}) {
-  const [name, setName] = React.useState("")
-  const [email, setEmail] = React.useState("")
-  const [phone, setPhone] = React.useState("")
-  const [message, setMessage] = React.useState("")
-  const [loading, setLoading] = React.useState(false)
-  const [sent, setSent] = React.useState(false)
+let sentForms: string[] = [];
+
+export default function ContactUsForm(props: {className?: string, formId?: string}) {
+  const [name, setName] = React.useState<string>("")
+  const [email, setEmail] = React.useState<string>("")
+  const [phone, setPhone] = React.useState<string>("")
+  const [message, setMessage] = React.useState<string>("")
+  const [loading, setLoading] = React.useState<boolean>(false)
+  const [sent, setSent] = React.useState<boolean>(props.formId ? sentForms.includes(props.formId) : false);
 
   const formMutation = api.submitContactForm.useMutation({
     onSuccess: () => {
       setSent(true);
+      props.formId && sentForms.push(props.formId);
     },
     onError: (err) => {
       toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu. Chyba: " + err.message);
