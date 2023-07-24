@@ -1,6 +1,6 @@
 import Page from "~/components/Page";
 
-export function TermsAndConditions() {
+export default function TermsAndConditions() {
   return (
     <Page metaTitle={"Obchodní podmínky"}>
       <div>

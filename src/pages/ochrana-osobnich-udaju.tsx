@@ -1,10 +1,10 @@
 import Page from "~/components/Page";
 
-export function PrivacyPolicy() {
+export default function PrivacyPolicy() {
   return (
     <Page metaTitle={"Ochrana osobních údajů"}>
       <div>
-        
+
       </div>
     </Page>
   )
