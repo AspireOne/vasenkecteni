@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <>
-      <Page metaTitle={"Hlavní stránka"} metaDesc={"Nezisková organizace Vášen ke čtení"} className={"space-y-32"}>
+      <Page metaTitle={"Hlavní stránka"} className={"space-y-32"}>
         <Header/>
         <div className={"space-y-32"}>
           <WhatWeDoSection/>
