@@ -23,16 +23,16 @@ function Section(props: PropsWithChildren<{title: string, imgSrc: string, imgPos
   return (
     <div className={twMerge(
       "flex flex-col gap-10 lg:gap-20 xl:gap-32 justify-between",
-      props.imgPos === "right" ? "sm:flex-row-reverse" : "sm:flex-row")}>
-      <img className={"w-full sm:w-1/3 object-contain"} alt={props.imgAlt} title={props.imgAlt} src={props.imgSrc}/>
+      props.imgPos === "right" ? "lg:flex-row" : "lg:flex-row-reverse")}>
       <div className={props.className}>
         <Section.Subtitle>
           {props.title}
         </Section.Subtitle>
-        <div className={"min-w-[400px]"}>
+        <div className={"md:min-w-[400px]"}>
           {props.children}
         </div>
       </div>
+      <img className={"w-full lg:w-1/3 object-contain"} alt={props.imgAlt} title={props.imgAlt} src={props.imgSrc}/>
     </div>
   )
 }

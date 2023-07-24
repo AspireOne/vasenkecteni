@@ -15,7 +15,7 @@ export default function SupportUsSection() {
 
 function SupportUs() {
   return (
-    <div className={"flex flex-col sm:flex-row gap-28 justify-between"}>
+    <div className={"flex flex-col lg:flex-row gap-28 justify-between"}>
       <div className={""}>
         <p>
           Stojíme tu s otevřeným srdcem a s vášní pro sdílení kouzla knih napříč generacemi. Naše nezisková organizace
