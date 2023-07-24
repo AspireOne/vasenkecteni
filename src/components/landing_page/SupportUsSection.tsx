@@ -3,6 +3,7 @@ import {PropsWithChildren, useState} from "react";
 import {twMerge} from "tailwind-merge";
 import {Props} from "next/script";
 import Button from "~/components/Button";
+import Input from "~/components/Input";
 
 export default function SupportUsSection() {
   return (
@@ -22,9 +23,12 @@ function SupportUs() {
           mladou a starší generaci skrze čtení a přinášet radost do domovů seniorů a komunitních center po celé České
           republice. Abychom mohli tuto dobrou věc rozšiřovat dál a poskytnout nezapomenutelné zážitky stále většímu
           množství lidí, potřebujeme vaši podporu. Vaše finanční příspěvky budou investovány do nákupu knih, organizace
-          čtenářských setkání, školení dobrovolníků a rozšíření našeho působení do dalších lokalit. S vaší podporou můžeme
-          společně vytvořit vzrušující a inspirativní zážitky, které spojí různé generace a pomohou nám budovat pevnější a
-          přátelštější komunitu. Každý příspěvek má význam a může změnit něčí život tím, že jim přineseme radost a lásku k
+          čtenářských setkání, školení dobrovolníků a rozšíření našeho působení do dalších lokalit. S vaší podporou
+          můžeme
+          společně vytvořit vzrušující a inspirativní zážitky, které spojí různé generace a pomohou nám budovat pevnější
+          a
+          přátelštější komunitu. Každý příspěvek má význam a může změnit něčí život tím, že jim přineseme radost a lásku
+          k
           čtení. <br/><br/>
 
           Pomozte nám šířit kouzlo knih dál a otevřete dveře novým dobrodružstvím pro ty, kteří by jinak nemuseli
@@ -40,12 +44,14 @@ function SupportUs() {
 }
 
 type Option = "monthly" | "one-time";
+
 function SupportUsForm() {
   const [selectedFreq, setSelectedFreq] = useState<Option>("monthly");
   const [value, setValue] = useState<number>(100);
 
   return (
-    <div className={"w-full sm:min-w-[400px] lg:min-w-[500px] bg-emerald-50 rounded-md p-8 space-y-12 text-center font-semibold"}>
+    <div
+      className={"w-full sm:min-w-[400px] lg:min-w-[500px] bg-emerald-50 rounded-md p-8 space-y-12 text-center font-semibold"}>
       <p className={"text-brand-800 text-2xl"}>Pomozte seniorům finančním darem</p>
       <p className={"text-brand-800 mx-4"}>
         Vaše pravidelná měsíční pomoc pro nás znamená opravdu hodně.
@@ -62,7 +68,7 @@ function SupportUsForm() {
         </div>
 
         <div className={"flex flex-row"}>
-          <AmountOptionButton value={50}  selectedValue={value} onClick={setValue} pos={"first"}/>
+          <AmountOptionButton value={50} selectedValue={value} onClick={setValue} pos={"first"}/>
           <AmountOptionButton value={100} selectedValue={value} onClick={setValue}/>
           <AmountOptionButton value={200} selectedValue={value} onClick={setValue}/>
           <AmountOptionButton value={500} selectedValue={value} onClick={setValue} pos={"last"}/>
@@ -76,31 +82,37 @@ function SupportUsForm() {
   );
 }
 
-function CustomValueInput(props: {value: number, onChange: (value: number) => void}) {
+function CustomValueInput(props: { value: number, onChange: (value: number) => void }) {
   return (
     <div>
-      <p className={"text-left text-brand-800 mb-1"}>Hodnota daru</p>
       <div className={"flex flex-row justify-center items-center"}>
-        <input type={"text"}
-               className={"text-left px-4 w-full h-10 outline-0 rounded-md rounded-r-none border-gray-200 border-2 p-2 font-semibold"}
+        <Input type={"number"}
+               className={""}
+               step={50}
+               label={"Hodnota daru"}
                value={props.value || ""}
                placeholder={"Hodnota daru"}
-               onChange={(e) => {
-                 if (e.target.value.match(/^[0-9]*$/)) {
-                   props.onChange(parseInt(e.target.value));
+               onChange={(val) => {
+                 if (val.match(/^[0-9]*$/)) {
+                   props.onChange(parseInt(val));
                  }
-                 if (!e.target.value) props.onChange(0);
+                 if (!val) props.onChange(0);
                }}>
-        </input>
-        <div className={"flex items-center justify-center px-4 h-10 border-2 border-gray-200 border-l-0 rounded-md rounded-l-none bg-gray-50 text-gray-600"}>
-          Kč
-        </div>
+          <div className={"flex items-center justify-center px-4 h-10 border-2 border-gray-200 border-l-0 rounded-md rounded-l-none bg-gray-50 text-gray-600"}>
+            Kč
+          </div>
+        </Input>
       </div>
     </div>
   )
 }
 
-function AmountOptionButton(props: {value: number, selectedValue: number, onClick: (value: number) => void, pos?: "first" | "middle" | "last"}) {
+function AmountOptionButton(props: {
+  value: number,
+  selectedValue: number,
+  onClick: (value: number) => void,
+  pos?: "first" | "middle" | "last"
+}) {
   const selected = props.value === props.selectedValue;
   let additionalStyles;
 
@@ -122,7 +134,7 @@ function AmountOptionButton(props: {value: number, selectedValue: number, onClic
   )
 }
 
-function FreqOptionButton(props: PropsWithChildren<{selected: boolean, onClick: () => void}>) {
+function FreqOptionButton(props: PropsWithChildren<{ selected: boolean, onClick: () => void }>) {
   return (
     <FormButton
       className={"rounded-md " + (props.selected && "border-brand-700")}
@@ -133,7 +145,7 @@ function FreqOptionButton(props: PropsWithChildren<{selected: boolean, onClick: 
   )
 }
 
-function FormButton(props: PropsWithChildren<{className?: string | false, onClick: () => void}>) {
+function FormButton(props: PropsWithChildren<{ className?: string | false, onClick: () => void }>) {
   return (
     <button
       className={twMerge(

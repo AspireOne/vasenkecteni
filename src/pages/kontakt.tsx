@@ -1,13 +1,20 @@
 import Page from "~/components/Page";
-import React from "react";
+import React, {FormEvent, useEffect} from "react";
 import {FiMail, FiPhone} from "react-icons/fi";
 import {FaInstagram, FaLinkedin} from "react-icons/fa";
+import {SubmitHandler, useForm} from "react-hook-form";
+import Input from "~/components/Input";
+import Button from "~/components/Button";
+import {toast} from "react-toastify";
+import {twMerge} from "tailwind-merge";
+import {api} from "~/utils/api";
 
 export default function Contact() {
   return (
     <Page metaTitle={"Kontakt"} className={"font-medium"}>
       <div className="container mx-auto max-w-5xl sm:px-10 lg:px-0 mt-24 lg:mt-20">
-        <div className="flex flex-col md:flex-row gap-14 px-4">
+        <div className="flex flex-col md:flex-row gap-20 justify-between px-4">
+
           <div className="">
             <h1 className={"title-xl"}>
               Kontaktujte nás
@@ -18,20 +25,102 @@ export default function Contact() {
             <Socials className={'mt-8'} />
             <LegalInfo className={'mt-8 hidden sm:block'} />
           </div>
-          <div className={'w-full'}>
-            <ContactUsForm />
-          </div>
+
+          <ContactUsForm />
         </div>
       </div>
     </Page>
   )
 }
 
+let globalSent = false;
 function ContactUsForm() {
-  return (
-    <div>
+  const [name, setName] = React.useState("")
+  const [email, setEmail] = React.useState("")
+  const [phone, setPhone] = React.useState("")
+  const [message, setMessage] = React.useState("")
+  const [loading, setLoading] = React.useState(false)
+  const [sent, setSent] = React.useState(globalSent)
 
-    </div>
+  const formMutation = api.submitContactForm.useMutation({
+    onSuccess: () => {
+      setSent(true);
+    },
+    onError: (err) => {
+      toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu. Chyba: " + err.message);
+    },
+    onSettled: () => {
+      setLoading(false);
+    },
+    onMutate: () => {
+      setLoading(true);
+    }
+  })
+
+  let buttText;
+  if (loading) buttText = "Odesílání...";
+  else if (sent) buttText = "Odesláno!";
+  else buttText = "Odeslat zprávu";
+
+  useEffect(() => {
+    globalSent = sent;
+  }, [sent])
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const err = validate();
+    if (err) {
+      toast.error(err);
+      return;
+    }
+
+    formMutation.mutate({name, email, phone, message});
+  }
+
+  function validate(): string | null {
+    if (!name) return "Zadejte vaše jméno";
+    if (!email) return "Zadejte váš email";
+    if (!message) return "Zadejte vaši zprávu";
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) return "Zadejte platný email";
+    return null;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className={"space-y-4 w-full max-w-[400px]"}>
+      <Input
+        label={"Vaše jméno"}
+        value={name}
+        onChange={setName}
+        placeholder={"Zadejte vaše jméno"}
+        disabled={loading || sent}
+      />
+      <Input
+        label={"Email"}
+        value={email}
+        onChange={setEmail}
+        placeholder={"Zadejte váš email"}
+        disabled={loading || sent}
+      />
+      <Input
+        label={"Telefon (nepovinné)"}
+        value={phone}
+        onChange={setPhone}
+        placeholder={"Zadejte váš telefon"}
+        disabled={loading || sent}
+      />
+      <Input
+        label={"Zpráva"}
+        value={message}
+        onChange={setMessage}
+        placeholder={"Zadejte vaši zprávu..."}
+        disabled={loading || sent}
+        autosize={true}
+        minRows={4}
+      />
+      <Button disabled={loading || sent} roundness={"medium"} className={twMerge("w-full", sent && "duration-1000 bg-green-500")}>
+        {buttText}
+      </Button>
+    </form>
   )
 }
 
