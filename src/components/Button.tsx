@@ -13,15 +13,15 @@ export default function Button(props: PropsWithChildren<{
   className?: string,
   onClick?: () => void
 }>) {
-  const style = getStyle(props.style ?? "default");
+  const styles = getStyles(props.style ?? "default");
   const disabledStyle = props.disabled ? "opacity-80 pointer-events-none" : "";
   const roundStyle = getRoundStyle(props.roundness ?? "full");
 
   return (
     <button onClick={props.onClick} disabled={props.disabled} className={
       twMerge(
-        "px-3 py-2 text-base font-semibold",
-        style,
+        "px-3 py-2 text-base font-semibold duration-150",
+        styles,
         roundStyle,
         props.className,
         disabledStyle
@@ -32,12 +32,12 @@ export default function Button(props: PropsWithChildren<{
   )
 }
 
-function getStyle(style: ButtonStyle) {
+function getStyles(style: ButtonStyle) {
   switch (style) {
     case "outline":
-      return "border-[3px] border-brand-800 text-brand-800 rounded-lg bg-white";
+      return "border-[3px] border-brand-800 text-brand-800 rounded-lg bg-white hover:bg-emerald-50/50";
     default:
-      return "bg-brand-800 text-white rounded duration-150 hover:bg-brand-800/90";
+      return "bg-brand-800 text-white rounded hover:bg-brand-800/90";
   }
 }
 
