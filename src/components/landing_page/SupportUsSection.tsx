@@ -4,6 +4,8 @@ import {twMerge} from "tailwind-merge";
 import {Props} from "next/script";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import {api} from "~/utils/api";
+import {toast} from "react-toastify";
 
 export default function SupportUsSection() {
   return (
@@ -43,43 +45,99 @@ function SupportUs() {
   )
 }
 
-type Option = "monthly" | "one-time";
+type Option = "monthly" | "once";
 
 function SupportUsForm() {
   const [selectedFreq, setSelectedFreq] = useState<Option>("monthly");
   const [value, setValue] = useState<number>(100);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  const donateMutation = api.donate.useMutation({
+    onSuccess: () => {
+      setDisabled(true);
+    },
+    onError: (err) => {
+      toast.error("Nepodařilo se odeslat příspěvek. Chyba: " + err.message);
+      setDisabled(false);
+    },
+    onSettled: () => {
+      setLoading(false);
+    },
+    onMutate: () => {
+      setLoading(true);
+      setDisabled(true);
+    }
+  })
+
+  function onSubmit() {
+    if (loading || disabled) return;
+
+    donateMutation.mutate({
+      amount: value,
+      frequency: selectedFreq
+    });
+  }
 
   return (
     <div
       className={"w-full sm:min-w-[400px] lg:min-w-[500px] bg-emerald-50 rounded-md p-8 space-y-12 text-center font-semibold"}>
-      <p className={"text-brand-800 text-2xl"}>Pomozte seniorům finančním darem</p>
+      <p className={"text-brand-800 text-2xl"}>
+        Pomozte seniorům finančním darem
+      </p>
+
       <p className={"text-brand-800 mx-4"}>
         Vaše pravidelná měsíční pomoc pro nás znamená opravdu hodně.
       </p>
 
-      <div className={"space-y-5 lg:mx-5"}>
-        <div className="flex justify-center items-center gap-2">
-          <FreqOptionButton onClick={() => setSelectedFreq("monthly")} selected={selectedFreq === "monthly"}>
-            Měsíčně
-          </FreqOptionButton>
-          <FreqOptionButton onClick={() => setSelectedFreq("one-time")} selected={selectedFreq === "one-time"}>
-            Jednorázově
-          </FreqOptionButton>
-        </div>
+      <Info
+        value={value}
+        selectedFreq={selectedFreq}
+        setSelectedFreq={setSelectedFreq}
+        setValue={setValue}/>
 
-        <div className={"flex flex-row"}>
-          <AmountOptionButton value={50} selectedValue={value} onClick={setValue} pos={"first"}/>
-          <AmountOptionButton value={100} selectedValue={value} onClick={setValue}/>
-          <AmountOptionButton value={200} selectedValue={value} onClick={setValue}/>
-          <AmountOptionButton value={500} selectedValue={value} onClick={setValue} pos={"last"}/>
-        </div>
+      <Button onClick={onSubmit} disabled={loading || disabled} roundness={"medium"} className={"w-[80%]"}>
+        {
+          loading
+            ? "Zpracovávání..."
+            : "Darovat"
+        }
+      </Button>
 
-        <CustomValueInput value={value} onChange={setValue}/>
-      </div>
-
-      <Button roundness={"medium"} className={"w-[80%]"}>Darovat</Button>
+      <p className={"text-brand-800 font-semibold pt-10"}>
+        Pravidelně přispívat můžete také zadáním trvalého příkazu přímo na náš bankovní účet 111111111111111/1111
+      </p>
     </div>
   );
+}
+
+function Info(props: {
+  selectedFreq: Option,
+  setSelectedFreq: (freq: Option) => void,
+  value: number,
+  setValue: (value: number) => void,
+}) {
+  return (
+    <div className={"space-y-5 lg:mx-5"}>
+      <div className="flex justify-center items-center gap-2">
+        <FreqOptionButton onClick={() => props.setSelectedFreq("monthly")} selected={props.selectedFreq === "monthly"}>
+          Měsíčně
+        </FreqOptionButton>
+        <FreqOptionButton onClick={() => props.setSelectedFreq("once")} selected={props.selectedFreq === "once"}>
+          Jednorázově
+        </FreqOptionButton>
+      </div>
+
+      <div className={"flex flex-row"}>
+        <AmountOptionButton value={50} selectedValue={props.value} onClick={props.setValue} pos={"first"}/>
+        <AmountOptionButton value={100} selectedValue={props.value} onClick={props.setValue}/>
+        <AmountOptionButton value={200} selectedValue={props.value} onClick={props.setValue}/>
+        <AmountOptionButton value={500} selectedValue={props.value} onClick={props.setValue} pos={"last"}/>
+      </div>
+
+      <CustomValueInput value={props.value} onChange={props.setValue}/>
+    </div>
+  )
 }
 
 function CustomValueInput(props: { value: number, onChange: (value: number) => void }) {
@@ -98,7 +156,8 @@ function CustomValueInput(props: { value: number, onChange: (value: number) => v
                  }
                  if (!val) props.onChange(0);
                }}>
-          <div className={"flex items-center justify-center px-4 h-10 border-2 border-gray-200 border-l-0 rounded-md rounded-l-none bg-gray-50 text-gray-600"}>
+          <div
+            className={"flex items-center justify-center px-4 h-10 border-2 border-gray-200 border-l-0 rounded-md rounded-l-none bg-gray-50 text-gray-600"}>
             Kč
           </div>
         </Input>

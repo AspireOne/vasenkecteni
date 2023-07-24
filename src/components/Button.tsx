@@ -10,14 +10,15 @@ export default function Button(props: PropsWithChildren<{
   style?: ButtonStyle,
   roundness?: ButtonRoundness,
   disabled?: boolean,
-  className?: string
+  className?: string,
+  onClick?: () => void
 }>) {
   const style = getStyle(props.style ?? "default");
   const disabledStyle = props.disabled ? "opacity-80 pointer-events-none" : "";
   const roundStyle = getRoundStyle(props.roundness ?? "full");
 
   return (
-    <button disabled={props.disabled} className={
+    <button onClick={props.onClick} disabled={props.disabled} className={
       twMerge(
         "px-3 py-2 text-base font-semibold",
         style,
