@@ -8,6 +8,7 @@ import Button from "~/components/Button";
 import {toast} from "react-toastify";
 import {twMerge} from "tailwind-merge";
 import {api} from "~/utils/api";
+import ContactUsForm from "~/components/ContactUsForm";
 
 export default function Contact() {
   return (
@@ -33,99 +34,7 @@ export default function Contact() {
   )
 }
 
-let globalSent = false;
-function ContactUsForm() {
-  const [name, setName] = React.useState("")
-  const [email, setEmail] = React.useState("")
-  const [phone, setPhone] = React.useState("")
-  const [message, setMessage] = React.useState("")
-  const [loading, setLoading] = React.useState(false)
-  const [sent, setSent] = React.useState(globalSent)
-
-  const formMutation = api.submitContactForm.useMutation({
-    onSuccess: () => {
-      setSent(true);
-    },
-    onError: (err) => {
-      toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu. Chyba: " + err.message);
-    },
-    onSettled: () => {
-      setLoading(false);
-    },
-    onMutate: () => {
-      setLoading(true);
-    }
-  })
-
-  let buttText;
-  if (loading) buttText = "Odesílání...";
-  else if (sent) buttText = "Odesláno!";
-  else buttText = "Odeslat zprávu";
-
-  useEffect(() => {
-    globalSent = sent;
-  }, [sent])
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const err = validate();
-    if (err) {
-      toast.error(err);
-      return;
-    }
-
-    formMutation.mutate({name, email, phone, message});
-  }
-
-  function validate(): string | null {
-    if (!name) return "Zadejte vaše jméno";
-    if (!email) return "Zadejte váš email";
-    if (!message) return "Zadejte vaši zprávu";
-    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email)) return "Zadejte platný email";
-    return null;
-  }
-
-  return (
-    <form onSubmit={handleSubmit} className={"space-y-4 w-full max-w-[400px]"}>
-      <Input
-        label={"Vaše jméno"}
-        value={name}
-        onChange={setName}
-        placeholder={"Zadejte vaše jméno"}
-        disabled={loading || sent}
-      />
-      <Input
-        label={"Email"}
-        value={email}
-        onChange={setEmail}
-        placeholder={"Zadejte váš email"}
-        disabled={loading || sent}
-      />
-      <Input
-        label={"Telefon (nepovinné)"}
-        value={phone}
-        onChange={setPhone}
-        placeholder={"Zadejte váš telefon"}
-        disabled={loading || sent}
-      />
-      <Input
-        label={"Zpráva"}
-        value={message}
-        onChange={setMessage}
-        placeholder={"Zadejte vaši zprávu..."}
-        disabled={loading || sent}
-        autosize={true}
-        minRows={4}
-      />
-      <Button disabled={loading || sent} roundness={"medium"} className={twMerge("w-full", sent && "duration-1000 bg-green-500")}>
-        {buttText}
-      </Button>
-    </form>
-  )
-}
-
 function Socials(props: {className?: string}) {
-
   return (
     <div className={props.className + ' text-lg'}>
       <ContactInfoItem icon={<FiMail />} href="mailto:info@crossbeliever.com">

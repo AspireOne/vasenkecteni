@@ -15,5 +15,13 @@ a:hover {
     @apply text-4xl text-brand-800 font-semibold;
 }
 
+.title-lg {
+    @apply text-3xl text-brand-800 font-semibold;
+}
+
+.title-md {
+    @apply text-xl text-brand-800 font-semibold;
+}
+
 @tailwind components;
 @tailwind utilities;
