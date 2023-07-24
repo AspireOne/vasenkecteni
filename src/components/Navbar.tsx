@@ -2,10 +2,10 @@ import {AiOutlineMenu} from 'react-icons/ai'
 import {IoMdClose} from 'react-icons/io'
 import {useState, useCallback} from 'react'
 import Link from "next/link";
-import {getNavbarPages, Page, pages} from "~/constants";
+import {getNavbarPages, getPageWithHash, Page, pages} from "~/constants";
 import {useRouter} from "next/router";
 import {twMerge} from "tailwind-merge";
-import Button from "~/components/Button";
+import Button, {ButtonLink} from "~/components/Button";
 import {motion} from "framer-motion";
 
 const Navigation = () => {
@@ -44,8 +44,13 @@ const Navigation = () => {
             <NavItemList/>
 
             <div className="mt-4 flex flex-wrap gap-2 sm:mt-0">
-              <Button className={"py-1"} style={"outline"}>Přidejte se k nám</Button>
-              <Button className={"py-1"}>Podpoř Vášeň ke čtení</Button>
+              <ButtonLink href={getPageWithHash(pages.about, pages.about.joinId)} className={"py-1"} style={"outline"}>
+                Přidejte se k nám
+              </ButtonLink>
+
+              <ButtonLink href={getPageWithHash(pages.home, pages.home.donateId)} className={"py-1"}>
+                Podpoř Vášeň ke čtení
+              </ButtonLink>
             </div>
           </div>
         </div>

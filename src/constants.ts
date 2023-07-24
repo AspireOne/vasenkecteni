@@ -8,11 +8,13 @@ export const pages = Object.freeze({
     path: '/',
     title: 'Domů',
     navbar: true,
+    donateId: "prispet",
   },
   about: {
     path: '/o-nas',
     title: 'O nás',
     navbar: true,
+    joinId: "pripojit-se",
   },
   contact: {
     path: '/kontakt',
@@ -45,6 +47,12 @@ export const pages = Object.freeze({
     navbar: false,
   }
 });
+
+export function getPageWithHash(page: Page, id: string) {
+  let path = page.path + (page.path.endsWith('/') ? '' : '/');
+  path += (id.startsWith('#') ? id : '#' + id);
+  return path;
+}
 
 export function getNavbarPages() {
   return Object.values(pages).filter(page => page.navbar);

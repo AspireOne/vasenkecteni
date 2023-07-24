@@ -5,10 +5,14 @@ a {
     color: inherit;
 }
 
-a:hover {
+a:not(.button-link):hover {
     text-decoration: underline;
     @apply text-brand-800;
     cursor: pointer;
+}
+
+html {
+    scroll-behavior: smooth !important;
 }
 
 .title-xl {

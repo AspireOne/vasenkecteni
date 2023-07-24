@@ -1,5 +1,6 @@
-import Button from "~/components/Button";
+import Button, {ButtonLink} from "~/components/Button";
 import React, {PropsWithChildren} from "react";
+import {getPageWithHash, pages} from "~/constants";
 
 export default function Header() {
   return (
@@ -11,8 +12,10 @@ export default function Header() {
             Propojujeme mladší generaci se staršími <span className={"font-bold"}>prostřednictvím čtení knih</span>
           </h1>
           <div className={"flex flex-row gap-4 flex-wrap"}>
-            <Button className={"px-10 whitespace-pre"}>Více informací</Button>
-            <Button className={"whitespace-pre"} style={"outline"}>Přidejte se k nám</Button>
+            <ButtonLink href={pages.about.path} className={"px-10 whitespace-pre"}>Více informací</ButtonLink>
+            <ButtonLink href={getPageWithHash(pages.about, pages.about.joinId)} className={"whitespace-pre"} style={"outline"}>
+              Přidejte se k nám
+            </ButtonLink>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 import React from "react";
 import Section from "~/components/landing_page/Section";
-import Button from "~/components/Button";
+import Button, {ButtonLink} from "~/components/Button";
+import {pages} from "~/constants";
 
 export default function OurTeamSection() {
   return (
@@ -27,7 +28,9 @@ function Founder() {
         dobrovolníky a podporou komunity mohou knihy skutečně změnit životy a vytvářet nezapomenutelné vzpomínky pro
         každého, kdo se k nám připojí na této dobrodružné cestě.
       </p>
-      <Button className={"mt-8 px-5"}>Více o našem týmu</Button>
+      <ButtonLink href={pages.about.path} className={"mt-8 px-5 max-w-max mx-auto"}>
+        Více o našem týmu
+      </ButtonLink>
     </Section>
   )
 }

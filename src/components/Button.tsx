@@ -1,36 +1,42 @@
 import {PropsWithChildren} from "react";
 import {twMerge} from "tailwind-merge";
+import Link from "next/link";
 
 export type ButtonStyle = "default" | "outline";
 export type ButtonRoundness = "medium" | "full";
-// default: green background, white text, rounded.
-// outline: green border, green text, white background, rounded.
 
-export default function Button(props: PropsWithChildren<{
-  style?: ButtonStyle,
-  roundness?: ButtonRoundness,
-  disabled?: boolean,
-  className?: string,
-  onClick?: () => void
-}>) {
-  const styles = getStyles(props.style ?? "default");
-  const disabledStyle = props.disabled ? "opacity-80 pointer-events-none" : "";
-  const roundStyle = getRoundStyle(props.roundness ?? "full");
+export function createButtonComponent(Element: any, isLink: boolean) {
+  return function Button(props: PropsWithChildren<{
+    style?: ButtonStyle,
+    href?: string,
+    roundness?: ButtonRoundness,
+    disabled?: boolean,
+    className?: string,
+    onClick?: () => void
+  }>) {
+    const styles = getStyles(props.style ?? "default");
+    const disabledStyle = props.disabled ? "opacity-80 pointer-events-none" : "";
+    const roundStyle = getRoundStyle(props.roundness ?? "full");
 
-  return (
-    <button onClick={props.onClick} disabled={props.disabled} className={
-      twMerge(
-        "px-3 py-2 text-base font-semibold duration-150",
-        styles,
-        roundStyle,
-        props.className,
-        disabledStyle
+    return (
+      <Element href={props.href} onClick={props.onClick} disabled={props.disabled} className={
+        twMerge(
+          "px-3 py-2 text-base font-semibold duration-150",
+          isLink && "flex items-center justify-center button-link",
+          styles,
+          roundStyle,
+          props.className,
+          disabledStyle
         )
-    }>
-      {props.children}
-    </button>
-  )
+      }>
+        {props.children}
+      </Element>
+    )
+  }
 }
+
+export const ButtonLink = createButtonComponent(Link, true);
+export default createButtonComponent("button", false);
 
 function getStyles(style: ButtonStyle) {
   switch (style) {

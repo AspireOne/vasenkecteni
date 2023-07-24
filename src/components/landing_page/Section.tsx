@@ -2,9 +2,9 @@ import React, {PropsWithChildren} from "react";
 import {twMerge} from "tailwind-merge";
 
 
-function Meta(props: PropsWithChildren<{className?: string, title: string, desc?: string}>) {
+function Meta(props: PropsWithChildren<{className?: string, title: string, desc?: string, id?: string}>) {
   return (
-    <div>
+    <div id={props.id}>
       <h2 className={"text-3xl sm:text-4xl text-brand-800 font-semibold text-center mb-20"}>
         {props.title}
       </h2>

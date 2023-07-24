@@ -6,10 +6,11 @@ import Button from "~/components/Button";
 import Input from "~/components/Input";
 import {api} from "~/utils/api";
 import {toast} from "react-toastify";
+import {pages} from "~/constants";
 
 export default function SupportUsSection() {
   return (
-    <Section.Meta title={"Podpořte nás"}>
+    <Section.Meta title={"Podpořte nás"} id={pages.home.donateId}>
       <SupportUs/>
     </Section.Meta>
   )

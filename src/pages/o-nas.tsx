@@ -2,6 +2,7 @@ import React, {PropsWithChildren} from "react";
 import Page from "~/components/Page";
 import Section from "~/components/landing_page/Section";
 import ContactUsForm from "~/components/ContactUsForm";
+import {pages} from "~/constants";
 
 export default function AboutUs() {
   return (
@@ -17,8 +18,8 @@ export default function AboutUs() {
 
 function WannaJoin() {
   return (
-    <div className={"text-center space-y-12"}>
-      <h2 className={"title-lg"}>Chcete s k nám přidat?</h2>
+    <div className={"text-center space-y-12"} id={pages.about.joinId}>
+      <h2 className={"title-lg"}>Chcete se k nám přidat?</h2>
       <p className={"text-lg max-w-[700px] mx-auto"}>
         Stále hledáme lidi do týmu, takže pokud se chcete přidat, neváhejte se nám ozvat skrze přiložený formulář.
       </p>
