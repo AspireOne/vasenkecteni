@@ -11,5 +11,9 @@ a:hover {
     cursor: pointer;
 }
 
+.title-xl {
+    @apply text-4xl text-brand-800 font-semibold;
+}
+
 @tailwind components;
 @tailwind utilities;

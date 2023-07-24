@@ -7,7 +7,7 @@ export default function Header() {
       <div className={"flex flex-col lg:flex-row items-center justify-between gap-20 mb-28"}>
 
         <div className={"space-y-10 flex-1"}>
-          <h1 className={"text-4xl text-brand-800 font-semibold"}>
+          <h1 className={"title-xl"}>
             Propojujeme mladší generaci se staršími <span className={"font-bold"}>prostřednictvím čtení knih</span>
           </h1>
           <div className={"flex flex-row gap-4 flex-wrap"}>
