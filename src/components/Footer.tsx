@@ -6,7 +6,7 @@ import {twMerge} from "tailwind-merge";
 
 export default function Footer() {
   return (
-    <footer className={""}>
+    <footer className={"mt-20"}>
       <Heading/>
       <div className={"px-4 md:px-32 lg:px-40 py-4 space-y-12 font-semibold leading-10"}>
         <div className={"flex flex-wrap justify-center md:justify-between gap-14"}>
@@ -38,9 +38,9 @@ function Heading() {
 function Panel(props: PropsWithChildren<{title: string}>) {
   return (
     <div className={"text-center"}>
-      <h3 className={"text-xl font-bold text-brand-800 mb-8"}>
+      <p className={"text-xl font-bold text-brand-800 mb-8"}>
         {props.title}
-      </h3>
+      </p>
       <div className={"flex flex-col"}>
         {props.children}
       </div>

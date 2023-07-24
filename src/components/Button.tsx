@@ -11,7 +11,7 @@ export default function Button(props: PropsWithChildren<{ style?: ButtonStyle, r
   const roundStyle = getRoundStyle(props.roundness ?? "full");
 
   return (
-    <button className={twMerge("px-3 py-1 text-base font-semibold", style, roundStyle, props.className)}>
+    <button className={twMerge("px-3 py-2 text-base font-semibold", style, roundStyle, props.className)}>
       {props.children}
     </button>
   )
@@ -22,7 +22,7 @@ function getStyle(style: ButtonStyle) {
     case "outline":
       return "border-[3px] border-brand-800 text-brand-800 rounded-lg bg-white";
     default:
-      return "bg-brand-800 text-white rounded";
+      return "bg-brand-800 text-white rounded duration-150 hover:bg-brand-800/90";
   }
 }
 

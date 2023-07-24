@@ -14,13 +14,13 @@ const Navigation = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <div className={"pb-24 md:pb-28 lg:pb-4"}>
-      <nav id="header" className="w-full z-10 text-white font-sans px-3 lg:static lg:ml-0 -ml-4 absolute">
+    <div className={"pb-24 md:pb-28 lg:pb-4 mb-12"}>
+      <nav id="header" className="absolute z-10 w-full px-3 font-sans text-white lg:static">
         <div
           className={twMerge(
             "w-full mt-3 px-4 container mx-auto",
-            "xl:max-w-5xl lg:flex flex-wrap items-center",
-            "justify-between py-2 md:mt-5",
+            "max-w-6xl lg:flex flex-wrap items-center",
+            "justify-between py-2 lg:py-0 md:mt-5",
             "bg-emerald-50 lg:rounded-full",
             isMenuOpen ? 'rounded-3xl' : 'rounded-full')
           }
@@ -43,9 +43,9 @@ const Navigation = () => {
             <Logo className={"hidden lg:block"}/>
             <NavItemList/>
 
-            <div className="flex gap-2 flex-wrap sm:mt-0 mt-4">
-              <Button  style={"outline"}>Přidejte se k nám</Button>
-              <Button >Podpoř Vášeň ke čtení</Button>
+            <div className="mt-4 flex flex-wrap gap-2 sm:mt-0">
+              <Button className={"py-1"} style={"outline"}>Přidejte se k nám</Button>
+              <Button className={"py-1"}>Podpoř Vášeň ke čtení</Button>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@ const Navigation = () => {
 function Logo(props: {className?: string}) {
   return (
     <Link href="/" className={twMerge("hover:no-underline", props.className)}>
-      <img alt="Logo" className="block max-h-[50px] md:max-h-[60px] ml-2" src="/logo.png"/>
+      <img alt="Logo" className="ml-2 block max-h-[50px] md:max-h-[60px]" src="/logo.png"/>
     </Link>
   )
 }
@@ -67,8 +67,8 @@ function MenuButton(props: { isMenuOpen: boolean, handleMenuClick: () => void })
     <button onClick={props.handleMenuClick} className="mr-5">
       {
         props.isMenuOpen
-          ? <IoMdClose className="text-black h-5 w-5"/>
-          : <AiOutlineMenu className="text-black h-5 w-5"/>
+          ? <IoMdClose className="h-5 w-5 text-black"/>
+          : <AiOutlineMenu className="h-5 w-5 text-black"/>
       }
     </button>
   )
@@ -76,7 +76,7 @@ function MenuButton(props: { isMenuOpen: boolean, handleMenuClick: () => void })
 
 function NavItemList() {
   return (
-    <ul className="list-reset lg:flex items-center justify-between gap-1">
+    <ul className="items-center justify-between gap-1 list-reset lg:flex">
       {
         getNavbarPages().map((page) => (
           <NavItem page={page}/>
