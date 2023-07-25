@@ -1,13 +1,19 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import {PropsWithChildren} from "react";
+import {PropsWithChildren, useEffect} from "react";
 import PageHead from "~/components/PageHead";
 import Navbar from "~/components/Navbar";
 import {twMerge} from "tailwind-merge";
 import Footer from "~/components/Footer";
 
 // Your existing Page component
+let hasPrev = false;
+
 function Page(props: PropsWithChildren<{className?: string, metaTitle: string, metaDesc?: string}>) {
   const fallbackDescription = "Propojujeme mladší generaci se staršími prostřednictvím čtení knih.";
+  useEffect(() => {
+    hasPrev = true;
+  }, [props.children])
+
   return (
     <div>
       <PageHead title={props.metaTitle} description={props.metaDesc ?? fallbackDescription}/>
@@ -15,7 +21,7 @@ function Page(props: PropsWithChildren<{className?: string, metaTitle: string, m
 
       <AnimatePresence>
         <motion.section
-          initial={{ y: -4, opacity: 1 }}
+          initial={{ y: hasPrev ? -4 : 0, opacity: 1 }}
           animate={{ y: 0, opacity: 1 }}
           // change animation movement to be fast at the start and slow at the end.
           transition={{ type: "spring", stiffness: 100, damping: 20, duration: 0.1 }}
