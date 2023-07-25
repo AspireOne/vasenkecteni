@@ -2,12 +2,6 @@ import Page from "~/components/Page";
 import React, {FormEvent, useEffect} from "react";
 import {FiMail, FiPhone} from "react-icons/fi";
 import {FaInstagram, FaLinkedin} from "react-icons/fa";
-import {SubmitHandler, useForm} from "react-hook-form";
-import Input from "~/components/Input";
-import Button from "~/components/Button";
-import {toast} from "react-toastify";
-import {twMerge} from "tailwind-merge";
-import {api} from "~/utils/api";
 import ContactUsForm from "~/components/ContactUsForm";
 
 export default function Contact() {

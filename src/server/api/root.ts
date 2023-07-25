@@ -2,6 +2,7 @@ import {exampleRouter} from "~/server/api/routers/example";
 import {createTRPCRouter, publicProcedure} from "~/server/api/trpc";
 import {z} from "zod";
 import {TRPCError} from "@trpc/server";
+import Mail from "~/server/mail";
 
 /**
  * This is the primary router for your server.
@@ -14,13 +15,11 @@ export const appRouter = createTRPCRouter({
       name: z.string().min(1, {message: "Musíte zadat jméno."}),
       email: z.string().email({message: "Musíte zadat platný email."}),
       phone: z.string().optional(),
-      message: z.string().min(1, {message: "Musíte zadat zprávu."}),
+      message: z.string().min(5, {message: "Musíte zadat zprávu."}),
     }))
-    .mutation(({input}) => {
-      throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: "Tato funkce ještě není implementovaná.",
-      })
+    .mutation(async ({input}) => {
+      await Mail.sendFormSubmissionMail(input);
+      await Mail.sendFormSubmissionAcknowledgementMail(input.email);
     }),
 
   donate: publicProcedure

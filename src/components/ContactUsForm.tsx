@@ -5,7 +5,7 @@ import Input from "~/components/Input";
 import Button from "~/components/Button";
 import {twMerge} from "tailwind-merge";
 
-type Data = {
+export type ContactUsData = {
   name: string,
   email: string,
   phone?: string,
@@ -28,7 +28,8 @@ export default function ContactUsForm(props: {className?: string, formId?: strin
       props.formId && sentForms.push(props.formId);
     },
     onError: (err) => {
-      toast.error("Nepodařilo se odeslat zprávu. Zkuste to prosím znovu. Chyba: " + err.message);
+      console.log(err.message);
+      toast.error("Chyba: " + err.message);
     },
     onSettled: () => {
       setLoading(false);
@@ -88,7 +89,7 @@ export default function ContactUsForm(props: {className?: string, formId?: strin
   )
 }
 
-function handleSubmit(data: Data, setSent: (sent: boolean) => void, setLoading: (loading: boolean) => void, mutate: (data: Data) => void) {
+function handleSubmit(data: ContactUsData, setSent: (sent: boolean) => void, setLoading: (loading: boolean) => void, mutate: (data: ContactUsData) => void) {
 
   const err = validate();
   if (err) {
