@@ -15,7 +15,7 @@ export const appRouter = createTRPCRouter({
       name: z.string().min(1, {message: "Musíte zadat jméno."}),
       email: z.string().email({message: "Musíte zadat platný email."}),
       phone: z.string().optional(),
-      message: z.string().min(5, {message: "Musíte zadat zprávu."}),
+      message: z.string().min(5, {message: "Zpráva je příliš krátká."}),
     }))
     .mutation(async ({input}) => {
       await Mail.sendFormSubmissionMail(input);

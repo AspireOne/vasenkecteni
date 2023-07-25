@@ -53,7 +53,7 @@ export default class Mail {
       + `Odesláno: ${time}\n`
       + `Jméno: ${data.name}\n`
       + `Email: ${data.email}\n`
-      + `Telefon: ${data.phone || "Neuvedeno"}`;
+      + `Telefon: ${data.phone || "neuvedeno"}`;
 
     const text = this.buildText(
       header,
