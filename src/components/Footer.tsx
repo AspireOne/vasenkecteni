@@ -67,7 +67,7 @@ function HomePanel() {
     <Panel title={"Domů"}>
       {
         [pages.whatWeDo, pages.about, pages.partners].map((page) => (
-          <Link href={page.path}>
+          <Link href={page.path} key={page.path}>
             {page.title}
           </Link>
         ))

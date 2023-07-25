@@ -84,7 +84,9 @@ function NavItemList() {
     <ul className="items-center justify-between gap-1 list-reset lg:flex">
       {
         getNavbarPages().map((page) => (
-          <NavItem page={page}/>
+          <li key={page.path}>
+            <NavItem page={page} key={page.path}/>
+          </li>
         ))
       }
     </ul>
@@ -116,25 +118,23 @@ function NavItem(props: { page: Page }) {
   };
 
   return (
-    <li key={props.page.path}>
-      <Link
-        className={
-          twMerge(
-            "inline-block text-gray-700",
-            "no-underline hover:text-gray-800," +
-            "hover:text-underline py-2 px-4 text-brand-800 font-semibold",
-            isActive ? "font-bold" : "")}
-        href={props.page.path}
-      >
-        {props.page.title}
-        <motion.div
-          className="h-1 bg-brand-700"
-          style={{ originX: 0 }}
-          initial={inactiveStyle}
-          animate={isActive ? activeStyle : inactiveStyle}
-        />
-      </Link>
-    </li>
+    <Link
+      className={
+        twMerge(
+          "inline-block text-gray-700",
+          "no-underline hover:text-gray-800," +
+          "hover:text-underline py-2 px-4 text-brand-800 font-semibold",
+          isActive ? "font-bold" : "")}
+      href={props.page.path}
+    >
+      {props.page.title}
+      <motion.div
+        className="h-1 bg-brand-700"
+        style={{ originX: 0 }}
+        initial={inactiveStyle}
+        animate={isActive ? activeStyle : inactiveStyle}
+      />
+    </Link>
   )
 }
 
