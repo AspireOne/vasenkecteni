@@ -32,6 +32,10 @@ export const env = createEnv({
 
         EMAIL_USERNAME_MAIN: z.string().min(1),
         EMAIL_USERNAME_NOREPLY: z.string().min(1),
+
+        STRIPE_SIGNING_SECRET: z.string(),
+        STRIPE_SK: z.string().min(1),
+        NEXT_PUBLIC_STRIPE_PK: z.string().min(1),
     },
 
     /**
@@ -64,6 +68,10 @@ export const env = createEnv({
 
         EMAIL_USERNAME_MAIN: process.env.EMAIL_USERNAME_MAIN,
         EMAIL_USERNAME_NOREPLY: process.env.EMAIL_USERNAME_NOREPLY,
+
+        STRIPE_SIGNING_SECRET: process.env.STRIPE_SIGNING_SECRET,
+        STRIPE_SK: process.env.STRIPE_SK,
+        NEXT_PUBLIC_STRIPE_PK: process.env.NEXT_PUBLIC_STRIPE_PK
     },
     /**
      * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

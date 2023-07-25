@@ -79,11 +79,11 @@ function HomePanel() {
 function BottomLinks() {
   return (
     <div className={"flex flex-row gap-4 mx-auto justify-center text-brand-800"}>
-      <Link href={pages.privacyPolicy.path}>
+      <Link href={"/files/Ochrana osobních údajů - Vášeň ke čtení.pdf"}>
         Ochrana osobních údajů
       </Link>
 
-      <Link href={pages.donationTemplate.path}>
+      <Link href={"/files/Vzor darovací smlouvy - Vášeň ke čtení.pdf"}>
         Vzor darovací smlouvy
       </Link>
     </div>
