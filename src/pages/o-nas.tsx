@@ -55,10 +55,10 @@ function PeopleSection() {
   return (
     <div className={"flex flex-col sm:flex-row gap-20 justify-center items-center"}>
       <PersonPanel name={"Matěj Plšek"} position={"Designer"} imgSrc={"/onas/designer_photo.png"}>
-        Matěj je má na starosti design naší neziskovky, mimo jiné ho baví čtení, cestování a startupy
+        Matěj má na starosti design naší neziskovky, mimo jiné ho baví čtení, cestování a startupy
       </PersonPanel>
       <PersonPanel name={"Veronika Černá"} position={"Sociální sítě"} imgSrc={"/onas/socials_manager_photo.png"}>
-        Matěj je má na starosti design naší neziskovky, mimo jiné ho baví čtení, cestování a startupy
+        Verča má na starosti sociální sítě a propagaci naší neziskovky
       </PersonPanel>
     </div>
   )

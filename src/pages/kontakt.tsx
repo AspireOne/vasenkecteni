@@ -14,7 +14,7 @@ export default function Contact() {
   return (
     <Page metaTitle={"Kontakt"} className={"font-medium"}>
       <div className="container mx-auto max-w-5xl sm:px-10 lg:px-0 mt-24 lg:mt-20">
-        <div className="flex flex-col md:flex-row gap-20 justify-between px-4">
+        <div className="flex flex-col items-center lg:items-start lg:flex-row gap-20 justify-between sm:px-4">
 
           <div className="">
             <h1 className={"title-xl"}>
@@ -27,7 +27,7 @@ export default function Contact() {
             <LegalInfo className={'mt-8 hidden sm:block'} />
           </div>
 
-          <ContactUsForm formId={"contact-us"} />
+          <ContactUsForm className={""} formId={"contact-us"} />
         </div>
       </div>
     </Page>
