@@ -18,7 +18,7 @@ function Meta(props: PropsWithChildren<{className?: string, title: string, desc?
   )
 }
 
-function Section(props: PropsWithChildren<{title: string, imgSrc: string, imgPos: "left" | "right",
+function Section(props: PropsWithChildren<{title: string, imgSrc: string, imgPos: "left" | "right", imgClassname?: string
   className?: string, imgAlt?: string}>) {
   return (
     <div className={twMerge(
@@ -32,7 +32,10 @@ function Section(props: PropsWithChildren<{title: string, imgSrc: string, imgPos
           {props.children}
         </div>
       </div>
-      <img className={"w-full lg:w-1/3 object-contain"} alt={props.imgAlt} title={props.imgAlt} src={props.imgSrc}/>
+      <img className={twMerge(
+        "w-full lg:w-1/3 object-contain",
+        props.imgClassname
+      )} alt={props.imgAlt} title={props.imgAlt} src={props.imgSrc}/>
     </div>
   )
 }
