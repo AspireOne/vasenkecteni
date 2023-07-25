@@ -12,7 +12,9 @@ export default function Header() {
             Propojujeme mladší generaci se staršími <span className={"font-bold"}>prostřednictvím čtení knih</span>
           </h1>
           <div className={"flex flex-row gap-4 flex-wrap"}>
-            <ButtonLink href={pages.about.path} className={"px-10 whitespace-pre"}>Více informací</ButtonLink>
+            <ButtonLink href={pages.whatWeDo.path} className={"px-10 whitespace-pre"}>
+              Více informací
+            </ButtonLink>
             <ButtonLink href={getPageWithHash(pages.about, pages.about.joinId)} className={"whitespace-pre"} style={"outline"}>
               Přidejte se k nám
             </ButtonLink>
@@ -29,7 +31,7 @@ export default function Header() {
 
 function Benefits() {
   return (
-    <div className={"flex flex-row gap-14 justify-center xl:justify-between flex-wrap"}>
+    <div className={"flex flex-row gap-24 sm:gap-14 justify-center xl:justify-between flex-wrap"}>
       <Benefit src={"/icons/leaf.png"} alt={"List"}>
         Podpora a šíření čtenářské kultury
       </Benefit>

@@ -14,7 +14,7 @@ function Goals() {
   return (
     <Section title={"Cíle naší organizace"} imgSrc={"/landing_page/who_is_welcome.png"} imgPos={"left"}
              imgAlt={"Kdo je u nás vítán?"}>
-      <p className={"min-w-[400px]"}>
+      <p>
         Účelem naší organizace je propojování generací skrze čtení: propojit mladší generaci se staršími
         prostřednictvím čtení knih. Organizujeme čtení maturitních knih nebo oblíbených knih naší komunity v domově
         seniorů. <br/><br/>
@@ -30,7 +30,7 @@ function WhereWeRead() {
   return (
     <Section title={"Kde momentálně čteme?"} imgSrc={"/landing_page/reading_location.png"} imgPos={"right"}
              imgAlt={"Kdo je u nás vítán?"}>
-      <p className={"min-w-[400px]"}>
+      <p>
         Momentálně jsme spouštíme v Alzheimerově domově v Českých Budějovicích. Náš projekt spočívá v uskutečňování
         pravidelných čtenářských setkání, kdy do domova zavítáme s knihami, které potěší srdce každého – od klasických
         příběhů až po moderní literaturu. <br/><br/>
