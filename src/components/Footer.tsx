@@ -54,9 +54,9 @@ function ContactInfoPanel() {
       <a href={"mailto:info@vasenkecteni.cz"}>info@vasenkecteni.cz</a>
       <a href={"tel:+420 604 477 760"}>+420 604 477 760</a>
       <div className={"inline-flex gap-4 text-[20px] mt-[10px] mx-auto"}>
-        <a href="https://www.instagram.com/vasenkecteni/"><BsInstagram /></a>
-        <a href="https://www.linkedin.com/company/v%C3%A1%C5%A1e%C5%88-ke-%C4%8Dten%C3%AD/"><BsFacebook /></a>
-        <a href="https://www.facebook.com/vasenkecteni"><BsLinkedin /></a>
+        <a href="https://www.instagram.com/vasenkecteni"><BsInstagram /></a>
+        <a href="https://www.facebook.com/vasenkecteni"><BsFacebook /></a>
+        <a href=""><BsLinkedin /></a>
       </div>
     </Panel>
   )
