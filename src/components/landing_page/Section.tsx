@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useEffect, useState} from "react";
+import React, {PropsWithChildren} from "react";
 import {twMerge} from "tailwind-merge";
 
 
@@ -32,28 +32,10 @@ function Section(props: PropsWithChildren<{title: string, imgSrc: string, imgPos
           {props.children}
         </div>
       </div>
-      <ImagePreloader className={"w-full lg:w-1/3 object-contain"} alt={props.imgAlt} src={props.imgSrc} />
+      <img className={"w-full lg:w-1/3 object-contain"} alt={props.imgAlt} title={props.imgAlt} src={props.imgSrc}/>
     </div>
   )
 }
-
-const ImagePreloader = (props: {src: string, alt?: string, className?: string}) => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const image = new Image();
-    image.src = props.src;
-    image.onload = () => setLoaded(true);
-    image.onerror = () => console.error(`Failed to load image: ${props.src}`);
-    return () => {
-      // Clean up if the component unmounts before the image is loaded
-      image.onload = null;
-      image.onerror = null;
-    };
-  }, [props.src]);
-
-  return loaded ? <img className={props.className} alt={props.alt} title={props.alt} src={props.src} /> : null;
-};
 
 function SectionSubtitle(props: PropsWithChildren<{className?: string}>) {
   return (
