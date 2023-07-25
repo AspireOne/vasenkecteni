@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from "react";
+import React, {PropsWithChildren, useEffect, useState} from "react";
 import Page from "~/components/Page";
 import Section from "~/components/landing_page/Section";
 import ContactUsForm from "~/components/ContactUsForm";
@@ -7,6 +7,7 @@ import {pages} from "~/constants";
 export default function AboutUs() {
   return (
     <Page metaTitle={"O nás"}>
+
       <Section.Meta title={"O nás"}>
         <AboutFounderSection/>
         <PeopleSection/>
@@ -31,7 +32,7 @@ function WannaJoin() {
 function AboutFounderSection() {
   return (
     <Section
-      className={"gap-2"}
+      className={"gap-2 min-w-[400px]"}
       imgSrc={"/onas/founder_photo.png"}
       imgPos={"left"}
       title={"Zakladatelka organizace"}
