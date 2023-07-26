@@ -15,7 +15,7 @@ export class StripeHelper {
     const session = await stripe.checkout.sessions.create({
       mode: once ? 'payment' : "subscription",
       submit_type: once ? 'donate' : undefined,
-      payment_method_types: ['card', "paypal"],
+      payment_method_types: ['card'],
       currency: 'CZK',
       locale: 'cs',
       allow_promotion_codes: false,
@@ -41,9 +41,11 @@ export class StripeHelper {
             product_data: {
               name: once ? "Příspěvek" : "Měsíční příspěvek",
               description: "Příspěvek pro Vášeň ke čtení",
+              images: ["https://vasenkecteni.cz/logo-circular.png"],
             },
           },
           quantity: 1,
+          // TODO: Image
         },
       ],
     });
