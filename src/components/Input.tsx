@@ -52,6 +52,7 @@ export default function Input(props: React.PropsWithChildren<{
       props.onChange && props.onChange(e.target.value)
     },
   }
+
   return (
     <div className={"flex flex-col gap-2 w-full"}>
       {props.label && <label className={"text-left text-brand-800 mb-1"}>{props.label}</label>}

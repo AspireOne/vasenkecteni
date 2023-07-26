@@ -69,7 +69,7 @@ function PersonPanel(props: PropsWithChildren<{name: string, position: string, i
   return (
     <div className={"space-y-5 max-w-[300px] text-center"}>
       <img src={props.imgSrc} alt={props.imgSrc} title={props.imgSrc} className={"h-56 w-auto mx-auto"}/>
-      <p className={"title-md"}>{props.name}</p>
+      <p className={"title-sm"}>{props.name}</p>
       <p className={"text-lg"}>{props.position}</p>
       <p>{props.children}</p>
     </div>

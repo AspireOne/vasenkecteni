@@ -1,26 +1,30 @@
 import {PropsWithChildren, useState} from "react";
 import {api} from "~/utils/api";
 import {toast} from "react-toastify";
-import Button from "~/components/Button";
+import Button, {ButtonLink} from "~/components/Button";
 import Input from "~/components/Input";
 import {twMerge} from "tailwind-merge";
 import {Stripe} from "stripe";
 import getStripe from "~/utils/get-stripe";
+import Link from "next/link";
+import {pages} from "~/constants";
 
 type Option = "monthly" | "once";
 
 export type DonateFormData = {
   amount: number
   frequency: Option
+  email?: string
 }
 
 export default function SupportUsForm() {
   const [selectedFreq, setSelectedFreq] = useState<Option>("monthly");
   const [value, setValue] = useState<number>(100);
   const [loading, setLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   const [disabled, setDisabled] = useState<boolean>(false);
 
-  const sessionMutation = api.donation.getSession.useMutation({
+  const sessionMutation = api.donation.createSession.useMutation({
     onSuccess: async (session) => {
       const stripe = await getStripe();
       const { error } = await stripe!.redirectToCheckout({
@@ -45,7 +49,8 @@ export default function SupportUsForm() {
 
     sessionMutation.mutate({
       amount: value,
-      frequency: selectedFreq
+      frequency: selectedFreq,
+      ...(selectedFreq === "monthly" && {email: email})
     });
   }
 
@@ -63,16 +68,26 @@ export default function SupportUsForm() {
       <Info
         value={value}
         selectedFreq={selectedFreq}
+        
         setSelectedFreq={setSelectedFreq}
-        setValue={setValue}/>
+        setValue={setValue}
+        
+        email={email}
+        setEmail={setEmail}
+      />
 
-      <Button onClick={onSubmit} disabled={loading || disabled} roundness={"medium"} className={"w-[80%]"}>
-        {
-          loading
-            ? "Zpracovávání..."
-            : "Darovat"
-        }
-      </Button>
+      <div className={"space-y-4"}>
+        <Button onClick={onSubmit} disabled={loading || disabled} roundness={"medium"} className={"w-[80%]"}>
+          {
+            loading
+              ? "Zpracovávání..."
+              : "Darovat"
+          }
+        </Button>
+        <ButtonLink style={"none"} href={pages.paymentManagement.path} className={"text-gray-600 font-base block p-0"}>
+          Moje příspěvky
+        </ButtonLink>
+      </div>
 
       <p className={"text-brand-800 font-semibold pt-10"}>
         Pravidelně přispívat můžete také zadáním trvalého příkazu přímo na náš bankovní účet 111111111111111/1111
@@ -84,8 +99,12 @@ export default function SupportUsForm() {
 function Info(props: {
   selectedFreq: Option,
   setSelectedFreq: (freq: Option) => void,
+  
   value: number,
   setValue: (value: number) => void,
+  
+  email?: string | null,
+  setEmail: (email: string) => void
 }) {
   return (
     <div className={"space-y-5 lg:mx-5"}>
@@ -106,6 +125,9 @@ function Info(props: {
       </div>
 
       <CustomValueInput value={props.value} onChange={props.setValue}/>
+      {props.selectedFreq === 'monthly' &&
+          <EmailInput value={props.email ?? ""} onChange={props.setEmail} required />
+      }
     </div>
   )
 }
@@ -132,6 +154,22 @@ function CustomValueInput(props: { value: number, onChange: (value: number) => v
           </div>
         </Input>
       </div>
+    </div>
+  )
+}
+
+function EmailInput(props: { value: string, onChange: (value: string) => void, required?: boolean }) {
+  return (
+    <div className={"space-y-1"}>
+      <Input type={"email"}
+             label={"Email"}
+             value={props.value || ""}
+             placeholder={"jan.novak@seznam.cz"}
+             onChange={(val) => props.onChange(val)}
+      />
+      {/*<p className={"text-left text-sm font-normal text-gray-500"}>
+        Používán pro správu vašich plateb.
+      </p>*/}
     </div>
   )
 }

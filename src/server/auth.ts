@@ -6,8 +6,11 @@ import {
   type DefaultSession,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import EmailProvider from "next-auth/providers/email";
 import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
+import Mail, {baseTransport, noreplyTransport} from "~/server/mail";
+import {createTransport} from "nodemailer";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -50,6 +53,19 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+    EmailProvider({
+      server: noreplyTransport,
+      from: `Vášeň ke čtení <${env.EMAIL_USERNAME_NOREPLY}>`,
+      sendVerificationRequest: async (params) => {
+        const { identifier, url, provider, theme,  } = params
+
+        const result = await Mail.sendEmailVerificationMail(identifier, url);
+        const failed = result.rejected.concat(result.pending).filter(Boolean)
+        if (failed.length) {
+          throw new Error(`Email (${failed.join(", ")}) could not be sent`)
+        }
+      }
     }),
     /**
      * ...add more providers here.

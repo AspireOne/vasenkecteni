@@ -20,6 +20,25 @@ model StripeSession {
   sessionId String
 }
 
+model Subscription {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  email          String   @unique
+  amount         Int
+  session        Json
+  subscriptionId String
+}
+
+model Donation {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String?
+  amount    Int
+  session   Json
+}
+
 // Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())

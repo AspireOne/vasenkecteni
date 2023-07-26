@@ -50,6 +50,11 @@ export const pages = Object.freeze({
     path: '/dekujeme',
     title: "Příspěvek",
     navbar: false
+  },
+  paymentManagement: {
+    path: '/platby',
+    title: "Vaše příspěvky",
+    navbar: false
   }
 });
 

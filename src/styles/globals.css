@@ -11,6 +11,21 @@ a:not(.button-link):hover {
     cursor: pointer;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c1cebf;
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7b857b;
+    border-radius: 16px;
+}
+
 html {
     scroll-behavior: smooth !important;
 }
@@ -24,6 +39,10 @@ html {
 }
 
 .title-md {
+    @apply text-2xl text-brand-800 font-semibold;
+}
+
+.title-sm {
     @apply text-xl text-brand-800 font-semibold;
 }
 

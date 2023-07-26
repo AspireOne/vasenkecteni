@@ -3,13 +3,16 @@ import {DonateFormData} from "~/components/SupportUsForm";
 import {pages} from "~/constants";
 import {prisma} from "~/server/db";
 
+const stripe = new Stripe(process.env.STRIPE_SK!, {
+  apiVersion: '2022-11-15',
+});
 
 export class StripeHelper {
-  public static async createSession(data: DonateFormData, origin: string, refId?: string) {
-    const stripe = new Stripe(process.env.STRIPE_SK!, {
-      apiVersion: '2022-11-15',
-    });
+  public static async cancelSubscription(subId: string) {
+    await stripe.subscriptions.del(subId);
+  }
 
+  public static async createSession(data: DonateFormData, origin: string, refId?: string) {
     const once = data.frequency === "once";
 
     const session = await stripe.checkout.sessions.create({
@@ -18,12 +21,14 @@ export class StripeHelper {
       payment_method_types: ['card'],
       currency: 'CZK',
       locale: 'cs',
+      customer_email: data.email,
       allow_promotion_codes: false,
       automatic_tax: {enabled: false},
       client_reference_id: refId,
 
       success_url: `${origin}${pages.orderResult.path}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: origin,
+      metadata: {},
 
       // line items for subscription.
       line_items: [
@@ -45,16 +50,9 @@ export class StripeHelper {
             },
           },
           quantity: 1,
-          // TODO: Image
         },
       ],
     });
-
-    prisma.stripeSession.create({
-      data: {
-        sessionId: session.id,
-      }
-    })
 
     return session;
   }

@@ -9,23 +9,26 @@ export const baseTransport: SMTPTransport.Options = {
   secure: env.EMAIL_USE_SSL === "true",
 }
 
-const mainTransporter = createTransport({
+export const mainTransport: SMTPTransport.Options = {
   ...baseTransport,
   auth: {
     user: env.EMAIL_USERNAME_MAIN,
     pass: env.EMAIL_PASSWORD,
   },
   from: `Vášeň ke čtení <${env.EMAIL_USERNAME_MAIN}>`
-});
+}
 
-const noreplyTransporter = createTransport({
+export const noreplyTransport: SMTPTransport.Options = {
   ...baseTransport,
   auth: {
     user: env.EMAIL_USERNAME_NOREPLY,
     pass: env.EMAIL_PASSWORD,
   },
   from: `Vášeň ke čtení <${env.EMAIL_USERNAME_NOREPLY}>`
-});
+}
+
+const mainTransporter = createTransport(mainTransport);
+const noreplyTransporter = createTransport(noreplyTransport);
 
 // Mail class.
 export default class Mail {
@@ -65,6 +68,28 @@ export default class Mail {
       subject: "Zpráva z webového formuláře",
       text: text,
       from: `Vášeň ke čtení • Formulář <${env.EMAIL_USERNAME_NOREPLY}>`,
+    });
+  }
+
+  public static async sendEmailVerificationMail(mail: string, url: string) {
+    const content = `Dobrý den,\n\npotvrďte prosím svůj e-mail kliknutím na následující odkaz: ${url}`;
+    const contentHtml = `Dobrý den,<br><br>potvrďte prosím svůj e-mail <a href="${url}">kliknutím sem</a>.<br><br>`;
+
+    const text = this.buildText(
+      content,
+      this.getNoreplyFooter()
+    )
+
+    const textHtml = this.buildText(
+      contentHtml,
+    )
+
+    return await noreplyTransporter.sendMail({
+      to: mail,
+      subject: "Potvrzení e-mailu",
+      text: text,
+      html: textHtml,
+      from: `Vášeň ke čtení <${env.EMAIL_USERNAME_NOREPLY}>`,
     });
   }
 
