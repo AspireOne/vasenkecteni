@@ -43,7 +43,6 @@ export default class Mail {
   }
 
   public static async sendFormSubmissionMail(data: ContactUsData) {
-    // Get current date and time in czech locale.
     const time = new Date().toLocaleString("cs-CZ", {
       timeZone: "Europe/Prague",
     });

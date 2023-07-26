@@ -6,7 +6,6 @@ export default function PageHead(props: PropsWithChildren<{title: string, descri
         <Head>
             <title key={"page-title"}>{props.title + " | Vášeň ke čtení"}</title>
             {props.description && <meta key="page-description" name="description" content={props.description} />}
-            {/*TODO: favicon*/}
             {props.children}
         </Head>
     )

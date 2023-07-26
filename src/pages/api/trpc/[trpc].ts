@@ -15,10 +15,6 @@ export default trpcNext.createNextApiHandler({
       );
     }
 
-    if (error.code === 'INTERNAL_SERVER_ERROR') {
-      // TODO: send to bug reporting.
-    }
-
     if (error.cause instanceof ZodError) {
       // Returning only first zod error message to client
       error.message = JSON.parse(error.message)[0].message;

@@ -1,8 +1,9 @@
-import {exampleRouter} from "~/server/api/routers/example";
+import {donationRouter} from "~/server/api/routers/donation";
 import {createTRPCRouter, publicProcedure} from "~/server/api/trpc";
 import {z} from "zod";
 import {TRPCError} from "@trpc/server";
 import Mail from "~/server/mail";
+import {StripeHelper} from "~/server/stripe";
 
 /**
  * This is the primary router for your server.
@@ -19,20 +20,11 @@ export const appRouter = createTRPCRouter({
     }))
     .mutation(async ({input}) => {
       await Mail.sendFormSubmissionMail(input);
-      await Mail.sendFormSubmissionAcknowledgementMail(input.email);
+      // Comment the acknowledgement out because otherwise the request takes too long.
+      //await Mail.sendFormSubmissionAcknowledgementMail(input.email);
     }),
 
-  donate: publicProcedure
-    .input(z.object({
-      amount: z.number().min(1, {message: "Musíte zadat částku větší než 0."}),
-      frequency: z.enum(["once", "monthly"]),
-    }))
-    .mutation(({input}) => {
-      throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: "Tato funkce ještě není implementovaná.",
-      })
-    }),
+  donation: donationRouter,
 });
 
 // export type definition of API

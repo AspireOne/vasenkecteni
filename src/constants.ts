@@ -45,6 +45,11 @@ export const pages = Object.freeze({
     path: '/darovaci-smlouva',
     title: 'Darovací smlouva',
     navbar: false,
+  },
+  orderResult: {
+    path: '/dekujeme',
+    title: "Příspěvek",
+    navbar: false
   }
 });
 

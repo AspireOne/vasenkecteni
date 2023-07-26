@@ -33,7 +33,7 @@ export const env = createEnv({
         EMAIL_USERNAME_MAIN: z.string().min(1),
         EMAIL_USERNAME_NOREPLY: z.string().min(1),
 
-        STRIPE_SIGNING_SECRET: z.string(),
+        STRIPE_SIGNING_SECRET: z.string().optional(),
         STRIPE_SK: z.string().min(1),
         NEXT_PUBLIC_STRIPE_PK: z.string().min(1),
     },
