@@ -2,6 +2,7 @@ import Stripe from "stripe";
 import {NextApiRequest, NextApiResponse} from "next";
 import {buffer} from "micro";
 import {prisma} from "~/server/db";
+import Mail from "~/server/mail";
 
 const stripe = require('stripe')(process.env.STRIPE_SK);
 
@@ -49,8 +50,6 @@ async function handleCheckoutSessionCompletedEvent(event: Stripe.Event) {
   const sessionParsed = JSON.parse(JSON.stringify(session));
   const amount = session.amount_total! / 100;
 
-  console.log("A", session.subscription);
-
   if (session.mode === "subscription") {
     await prisma.subscription.create({
       data: {
@@ -69,6 +68,8 @@ async function handleCheckoutSessionCompletedEvent(event: Stripe.Event) {
       }
     })
   }
+
+  if (email) await Mail.sendDonationAcknowledgementMail(email);
 
   //await Email.sendOfferPaidMail(user.email, stripeSession.offerId as OfferId, stripeSession.orderId);
 }

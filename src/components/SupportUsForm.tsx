@@ -90,7 +90,7 @@ export default function SupportUsForm() {
       </div>
 
       <p className={"text-brand-800 font-semibold pt-10"}>
-        Pravidelně přispívat můžete také zadáním trvalého příkazu přímo na náš bankovní účet 111111111111111/1111
+        Pravidelně přispívat můžete také zadáním trvalého příkazu přímo na náš bankovní účet 327268420/0300
       </p>
     </div>
   );

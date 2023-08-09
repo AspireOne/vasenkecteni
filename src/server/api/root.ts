@@ -20,7 +20,7 @@ export const appRouter = createTRPCRouter({
     }))
     .mutation(async ({input}) => {
       await Mail.sendFormSubmissionMail(input);
-      setTimeout(() => Mail.sendFormSubmissionAcknowledgementMail(input.email), 200);
+      //setTimeout(() => Mail.sendFormSubmissionAcknowledgementMail(input.email), 200);
     }),
 
   donation: donationRouter,

@@ -107,4 +107,34 @@ export default class Mail {
       from: `Vášeň ke čtení • Formulář <${env.EMAIL_USERNAME_NOREPLY}>`,
     });
   }
+
+  public static async sendDonationAcknowledgementMail(userMail: string) {
+    const content = `Dobrý den,\n\nVáš příspěvek byl úspěšně přijat. Děkujeme vám za podporu.`;
+    const text = this.buildText(
+      content,
+      this.getNoreplyFooter()
+    )
+
+    await noreplyTransporter.sendMail({
+      to: userMail,
+      subject: "Potvrzení o příspěvku",
+      text: text,
+      from: `Vášeň ke čtení <${env.EMAIL_USERNAME_NOREPLY}>`,
+    });
+  }
+
+  public static async sendSubscriptionCancellationMail(userMail: string) {
+    const content = `Dobrý den,\n\nVáš měsíční příspěvek byl úspěšně zrušen. Děkujeme vám za podporu.`;
+    const text = this.buildText(
+      content,
+      this.getNoreplyFooter()
+    )
+
+    await noreplyTransporter.sendMail({
+      to: userMail,
+      subject: "Potvrzení o zrušení měsíčního příspěvku",
+      text: text,
+      from: `Vášeň ke čtení <${env.EMAIL_USERNAME_NOREPLY}>`,
+    });
+  }
 }
