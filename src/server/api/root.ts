@@ -4,6 +4,7 @@ import {z} from "zod";
 import {TRPCError} from "@trpc/server";
 import Mail from "~/server/mail";
 import {StripeHelper} from "~/server/stripe";
+import {prisma} from "~/server/db";
 
 /**
  * This is the primary router for your server.
@@ -23,6 +24,17 @@ export const appRouter = createTRPCRouter({
       //setTimeout(() => Mail.sendFormSubmissionAcknowledgementMail(input.email), 200);
     }),
 
+  testDb: publicProcedure
+    .output(z.boolean())
+    .query(async () => {
+      try {
+        const count = await prisma.user.count();
+        return count >= 0;
+      } catch (err) {
+        console.error(err);
+        return false;
+      }
+    }),
   donation: donationRouter,
 });
 
