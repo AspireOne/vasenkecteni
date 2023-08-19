@@ -27,6 +27,7 @@ export const appRouter = createTRPCRouter({
   testDb: publicProcedure
     .output(z.boolean())
     .query(async () => {
+      
       try {
         const count = await prisma.user.count();
         return count >= 0;
