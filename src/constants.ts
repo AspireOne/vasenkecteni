@@ -24,12 +24,12 @@ export const pages = Object.freeze({
   partners: {
     path: '/partneri',
     title: 'Partneři',
-    navbar: true,
+    navbar: false, // TODO: Enable when ready.
   },
   whatWeDo: {
     path: '/co-delame',
     title: 'Co děláme',
-    navbar: true,
+    navbar: false, // TODO: Enable when ready.
   },
   privacyPolicy: {
     path: '/ochrana-osobnich-udaju',

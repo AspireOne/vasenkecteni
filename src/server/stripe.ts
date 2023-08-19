@@ -45,7 +45,7 @@ export class StripeHelper {
 
             product_data: {
               name: once ? "Příspěvek" : "Měsíční příspěvek",
-              description: "Příspěvek pro Vášeň ke čtení",
+              description: "na podporu Vášeň ke čtení",
               images: ["https://vasenkecteni.cz/logo-circular.png"],
             },
           },
