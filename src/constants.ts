@@ -6,7 +6,7 @@ export type Page = {
 export const pages = Object.freeze({
   home: {
     path: '/',
-    title: 'Domů',
+    title: 'Domů / Co Děláme',
     navbar: true,
     donateId: "prispet",
   },
@@ -21,16 +21,21 @@ export const pages = Object.freeze({
     title: 'Kontakt',
     navbar: true,
   },
-  partners: {
+  news: {
+    path: '/aktuality',
+    title: 'Aktuality',
+    navbar: true,
+  },
+  /*partners: {
     path: '/partneri',
     title: 'Partneři',
-    navbar: false, // TODO: Enable when ready.
+    navbar: false,
   },
   whatWeDo: {
     path: '/co-delame',
     title: 'Co děláme',
-    navbar: false, // TODO: Enable when ready.
-  },
+    navbar: false,
+  },*/
   privacyPolicy: {
     path: '/ochrana-osobnich-udaju',
     title: 'Ochrana osobních údajů',

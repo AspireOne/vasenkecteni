@@ -12,7 +12,7 @@ export default function Header() {
             Propojujeme mladší generaci se staršími <span className={"font-bold"}>prostřednictvím čtení knih</span>
           </h1>
           <div className={"flex flex-row gap-4 flex-wrap"}>
-            <ButtonLink href={pages.whatWeDo.path} className={"px-10 whitespace-pre"}>
+            <ButtonLink href={getPageWithHash(pages.home, "what-we-do")} className={"px-10 whitespace-pre"}>
               Více informací
             </ButtonLink>
             <ButtonLink href={getPageWithHash(pages.about, pages.about.joinId)} className={"whitespace-pre"} style={"outline"}>

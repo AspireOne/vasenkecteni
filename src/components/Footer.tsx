@@ -56,7 +56,7 @@ function ContactInfoPanel() {
       <div className={"inline-flex gap-4 text-[20px] mt-[10px] mx-auto"}>
         <a href="https://www.instagram.com/vasenkecteni"><BsInstagram /></a>
         <a href="https://www.facebook.com/vasenkecteni"><BsFacebook /></a>
-        <a href=""><BsLinkedin /></a>
+        {/*<a href=""><BsLinkedin /></a>*/}
       </div>
     </Panel>
   )
@@ -66,7 +66,7 @@ function HomePanel() {
   return (
     <Panel title={"Domů"}>
       {
-        [pages.whatWeDo, pages.about, pages.partners].map((page) => (
+        [pages.home, pages.about, pages.news].map((page) => (
           <Link href={page.path} key={page.path}>
             {page.title}
           </Link>

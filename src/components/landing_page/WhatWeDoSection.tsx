@@ -3,7 +3,7 @@ import Section from "~/components/landing_page/Section";
 
 export default function WhatWeDoSection() {
   return (
-    <Section.Meta title={"Co přesně děláme?"}>
+    <Section.Meta title={"Co přesně děláme?"} id={"what-we-do"}>
       <Goals/>
       <WhereWeRead/>
     </Section.Meta>

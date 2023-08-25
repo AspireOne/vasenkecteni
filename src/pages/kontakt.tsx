@@ -1,7 +1,7 @@
 import Page from "~/components/Page";
 import React, {FormEvent, useEffect} from "react";
 import {FiMail, FiPhone} from "react-icons/fi";
-import {FaInstagram, FaLinkedin} from "react-icons/fa";
+import {FaFacebook, FaInstagram, FaLinkedin} from "react-icons/fa";
 import ContactUsForm from "~/components/ContactUsForm";
 
 export default function Contact() {
@@ -31,24 +31,24 @@ export default function Contact() {
 function Socials(props: {className?: string}) {
   return (
     <div className={props.className + ' text-lg'}>
-      <ContactInfoItem icon={<FiMail />} href="mailto:info@crossbeliever.com">
-        info@crossbeliever.com
+      <ContactInfoItem icon={<FiMail />} href="mailto:info@vasenkecteni.cz">
+        info@vasenkecteni.cz
       </ContactInfoItem>
 
-      <ContactInfoItem icon={<FiPhone />} href="tel:+420604744760">
-        +420 604 744 760
-      </ContactInfoItem>
-
-      <ContactInfoItem icon={<FaInstagram />} href="https://instagram.com/">
+      <ContactInfoItem icon={<FaInstagram />} href="https://www.instagram.com/vasenkecteni">
         Instagram
       </ContactInfoItem>
 
-      <ContactInfoItem
+      <ContactInfoItem icon={<FaFacebook />} href="https://www.facebook.com/vasenkecteni">
+        Facebook
+      </ContactInfoItem>
+
+      {/*<ContactInfoItem
         icon={<FaLinkedin />}
         href="https://www.linkedin.com/in/mat%C4%9Bj-pl%C5%A1ek-64906419b/"
       >
         LinkedIn
-      </ContactInfoItem>
+      </ContactInfoItem>*/}
     </div>
   )
 }
