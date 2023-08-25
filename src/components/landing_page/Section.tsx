@@ -33,7 +33,7 @@ function Section(props: PropsWithChildren<{title: string, imgSrc: string, imgPos
         </div>
       </div>
       <img className={twMerge(
-        "w-full lg:w-1/3 object-contain",
+        "w-full lg:w-1/3 firefox-section-img-w object-contain",
         props.imgClassname
       )} alt={props.imgAlt} title={props.imgAlt} src={props.imgSrc}/>
     </div>

@@ -30,6 +30,12 @@ html {
     scroll-behavior: smooth !important;
 }
 
+@supports (-moz-appearance:none) {
+    .firefox-section-img-w {
+        width: 100% !important;
+    }
+}
+
 .title-xl {
     @apply text-4xl text-brand-800 font-semibold;
 }
