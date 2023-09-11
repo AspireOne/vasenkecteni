@@ -59,7 +59,7 @@ const Navigation = () => {
   )
 }
 
-function Logo(props: {className?: string}) {
+function Logo(props: { className?: string }) {
   return (
     <Link href="/" className={twMerge("hover:no-underline", props.className)}>
       <img alt="Logo" className="ml-2 block max-h-[50px] md:max-h-[60px]" src="/logo.png"/>
@@ -123,14 +123,14 @@ function NavItem(props: { page: Page }) {
         twMerge(
           "inline-block text-gray-700",
           "no-underline hover:text-gray-800," +
-          "hover:text-underline py-2 px-4 text-brand-800 font-semibold",
-          isActive ? "font-bold" : "")}
+          "py-2 px-4 text-brand-800 font-semibold",
+          isActive ? "font-bold nav-item-active" : "")}
       href={props.page.path}
     >
       {props.page.title}
       <motion.div
         className="h-1 bg-brand-700"
-        style={{ originX: 0 }}
+        style={{originX: 0}}
         initial={inactiveStyle}
         animate={isActive ? activeStyle : inactiveStyle}
       />

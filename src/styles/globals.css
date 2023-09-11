@@ -5,7 +5,7 @@ a {
     color: inherit;
 }
 
-a:not(.button-link):hover {
+a:not(.button-link, .nav-item-active):hover {
     text-decoration: underline;
     @apply text-brand-800;
     cursor: pointer;
