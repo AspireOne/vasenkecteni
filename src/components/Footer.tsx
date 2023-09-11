@@ -52,7 +52,7 @@ function ContactInfoPanel() {
   return (
     <Panel title={"Kontakt"}>
       <a href={"mailto:info@vasenkecteni.cz"}>info@vasenkecteni.cz</a>
-      <a href={"tel:+420 739 304 270"}>+420 604 477 760</a>
+      <a href={"tel:+420 739 304 270"}>+420 739 304 270</a>
       <div className={"inline-flex gap-4 text-[20px] mt-[10px] mx-auto"}>
         <a href="https://www.instagram.com/vasenkecteni"><BsInstagram /></a>
         <a href="https://www.facebook.com/vasenkecteni"><BsFacebook /></a>
