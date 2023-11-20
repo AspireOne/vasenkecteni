@@ -23,7 +23,7 @@
     "framer-motion": "^10.13.0",
     "micro": "^10.0.1",
     "next": "^13.4.2",
-    "next-auth": "^4.22.1",
+    "next-auth": "^4.24.5",
     "nodemailer": "^6.9.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
