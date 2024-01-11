@@ -20,6 +20,11 @@ export default function Footer() {
 
         <BottomLinks/>
       </div>
+      <div className={"font-bold text-brand-800 text-center mx-auto mb-5"}>
+        <a href={"https://www.linkedin.com/in/matej-pesl/"}>
+          Vytvořil Matěj Pešl
+        </a>
+      </div>
     </footer>
   )
 }
